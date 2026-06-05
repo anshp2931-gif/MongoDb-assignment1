@@ -3,7 +3,9 @@ const noteRoutes = require("./routes/note.routes");
 
 const app = express();
 
-app.use(express.json());
+// Body parser middleware - ensure it parses JSON requests
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 app.use("/api/notes", noteRoutes);
 

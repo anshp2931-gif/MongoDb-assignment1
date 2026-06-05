@@ -44,6 +44,14 @@ const createNote = async (req, res) => {
 // 2. POST /api/notes/bulk — Create multiple notes
 const createBulkNotes = async (req, res) => {
   try {
+    if (!req.body) {
+      return res.status(400).json({
+        success: false,
+        message: "Request body is missing or not valid JSON",
+        data: null,
+      });
+    }
+
     const { notes } = req.body;
 
     if (!notes || !Array.isArray(notes) || notes.length === 0) {
